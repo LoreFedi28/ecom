@@ -7,6 +7,8 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm, UserInfoForm
 from django import forms
 from django.db.models import Q
+import json
+from cart.cart import Cart
 
 def search(request):
     if request.method == 'POST':
@@ -104,6 +106,15 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+
+            current_user = Profile.objects.get(user__id=request.user.id)
+            saved_cart = current_user.old_cart
+            if saved_cart:
+                converted_cart = json.loads(saved_cart)
+                cart = Cart(request)
+                for key,value in converted_cart.items():
+                    cart.db_add(product=key, quantity=value)
+
             messages.success(request, 'You are now logged in')
             return redirect('home')
         else:
