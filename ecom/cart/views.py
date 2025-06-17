@@ -47,7 +47,7 @@ def cart_update(request):
     cart = Cart(request)
     if request.POST.get('action') == 'post':
         product_id = int(request.POST.get('product_id'))
-        product_qty = int(request.POST.get('product_qty', 1) or 1)
+        product_qty = int(request.POST.get('product_qty'))
 
         cart.update(product=product_id, quantity=product_qty)
 

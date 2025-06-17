@@ -1,11 +1,26 @@
 from django.shortcuts import render, redirect
-from .models import Product, Category
+from .models import Product, Category, Profile
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm
+from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm, UserInfoForm
 from django import forms
+
+def update_info(request):
+    if request.user.is_authenticated:
+        current_user, created = Profile.objects.get_or_create(user=request.user)
+        form = UserInfoForm(request.POST or None, instance=current_user)
+
+        if form.is_valid():
+            form.save()
+
+            messages.success(request, 'Your info has been updated successfully.')
+            return redirect('home')
+        return render(request, 'update_info.html', {'form': form})
+    else:
+        messages.error(request, 'You need to be logged in to update your info.')
+        return redirect('home')
 
 def update_password(request):
     if request.user.is_authenticated:
@@ -42,7 +57,7 @@ def update_user(request):
         return render(request, 'update_user.html', {'user_form': user_form})
     else:
         messages.error(request, 'You need to be logged in to update your profile.')
-        return redirect('login')
+        return redirect('home')
 
 def category_summary(request):
     categories = Category.objects.all()
@@ -99,8 +114,8 @@ def register_user(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
-            messages.success(request, 'Registration successful.')
-            return redirect('home')
+            messages.success(request, 'Registration successful. Fill Out Your Info')
+            return redirect('update_info')
         else:
             messages.error(request, 'Registration failed. Please try again.')
             return redirect('register')
