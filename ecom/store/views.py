@@ -26,7 +26,7 @@ def search(request):
 
 def update_info(request):
     if request.user.is_authenticated:
-        current_user, created = Profile.objects.get_or_create(user__id=request.user)
+        current_user = Profile.objects.get(user__id=request.user.id)
         shipping_user = ShippingAddress.objects.get(user__id=request.user.id)
         form = UserInfoForm(request.POST or None, instance=current_user)
 
