@@ -4,10 +4,10 @@ from payment.forms import ShippingForm, PaymentForm
 from payment.models import ShippingAddress, Order, OrderItem
 from django.contrib.auth.models import User
 from django.contrib import messages
-from store.models import Product
+from store.models import Product, Profile
 import datetime
 
-def order(request, pk):
+def orders(request, pk):
     if request.user.is_authenticated and request.user.is_superuser:
         # Get the order
         order = Order.objects.get(id=pk)
@@ -125,6 +125,11 @@ def process_order(request):
                 for key in list(request.session.keys()):
                     if key == "session_key":
                         del request.session[key]
+
+                # Delete Cart from Database
+                current_user = Profile.objects.filter(user__id=request.user.id)
+                # Delete shopping cart in the database
+                current_user.update(old_cart="")
 
             messages.success(request, "Order Placed Successfully.")
             return redirect('home')
