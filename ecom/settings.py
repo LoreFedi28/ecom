@@ -76,11 +76,11 @@ DATABASES = {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
+        'NAME': 'railway',
+        'USER': 'postgres',
         'PASSWORD': os.environ['DB_PASSWORD_YO'],
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT'),
+        'HOST': 'tramway.proxy.rlwy.net',
+        'PORT': '58459',
     }
 }
 
