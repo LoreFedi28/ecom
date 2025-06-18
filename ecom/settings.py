@@ -8,6 +8,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Load environment variables from .env file
 load_dotenv()
 
+# password for localhost
+#DB_PASSWORD_YO = os.environ.get('DB_PASSWORD_YO')
+
+# password DB
+DB_PASSWORD_YO = os.environ['DB_PASSWORD_YO']
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
@@ -17,8 +23,8 @@ SECRET_KEY = 'django-insecure-goy+s@jo$vi$#$7(2c#6fhd01x$^b2i__uu_*((7xfjhn96$-)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ecom-production-14d9.up.railway.app', 'https://ecom-production-14d9.up.railway.app']
-CSRF_TRUSTED_ORIGINS = ['https://ecom-production-14d9.up.railway.app']
+ALLOWED_HOSTS = ['ecom-production-14d9.up.railway.app', 'https://ecom-production-14d9.up.railway.app', 'localhost', 'ee5c-37-179-117-206.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['https://ecom-production-14d9.up.railway.app', 'https://ee5c-37-179-117-206.ngrok-free.app']
 
 
 # Application definition
@@ -79,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': os.environ['DB_PASSWORD_YO'],
+        'PASSWORD': DB_PASSWORD_YO,
         'HOST': 'tramway.proxy.rlwy.net',
         'PORT': '58459',
     }
