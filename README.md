@@ -39,7 +39,7 @@ Questo progetto è un sito e-commerce sviluppato con Django. Permette agli utent
 
 ### Link al sito online
 
-👉 [https://ecom-production-14d9.up.railway.app/](https://ecom-production-14d9.up.railway.app/)
+[https://ecom-production-14d9.up.railway.app/](https://ecom-production-14d9.up.railway.app/)
 
 ### Passaggi principali
 
