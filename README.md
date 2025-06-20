@@ -73,29 +73,30 @@ Questo progetto è un sito e-commerce sviluppato con Django. Permette agli utent
 
 1. Clonare il progetto
 2. Installare le dipendenze:
+   
    ```bash
    pip install -r requirements.txt
+   ````
+4. Creare il file `.env` con le variabili d’ambiente necessarie
+5. Applicare le migrazioni:
 
-	3.	Creare il file .env con le variabili d’ambiente necessarie
-	4.	Applicare le migrazioni:
+   ```bash
+   python manage.py migrate
+   ```
+6. Creare un superuser:
 
-python manage.py migrate
+   ```bash
+   python manage.py createsuperuser
+   ```
+7. Avviare il server:
 
+   ```bash
+   python manage.py runserver
+   ```
 
-	5.	Creare un superuser:
+---
 
-python manage.py createsuperuser
+## Autore
 
-
-	6.	Avviare il server:
-
-python manage.py runserver
-
-
-
-⸻
-
-Autore
-
-Lorenzo Fedi
+**Lorenzo Fedi 7075327**
 Studente di Ingegneria Informatica – A.A. 2025
